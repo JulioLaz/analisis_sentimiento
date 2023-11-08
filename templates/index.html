@@ -1,39 +1,114 @@
 <!DOCTYPE html>
-<html >
+<html>
+
 <head>
   <meta charset="UTF-8">
-  <title>ML API</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  
+  <title>Sentimiento</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet">
 </head>
 
 <body>
- <div class="login">
-	<h1>Clasificador de frases según el sentimiento</h1>
+  <div class="login">
+    <h1>Clasificador de frases según el sentimiento</h1>
 
-    <form action="{{ url_for('predict')}}"method="post">
-    	<input type="text" name="titulo" placeholder="escribe la frase" required="required" />
+    <form action="{{ url_for('predict')}}" method="post">
+      <input type="text" name="titulo" placeholder="escribe la frase" required="required" />
       <button id="clasificarBtn" type="submit" class="btn btn-primary btn-block btn-large">Clasificar</button>
     </form>
 
+    <div class="div_frase {% if title %}show{% else %}hide{% endif %}">
+      <h2>Frase:</h2>
+      <p class="frase">{{ title }}</p>
+    </div>
 
-   <br>
-   <br>
-   {{ title }}
-   <br>
-   <br>
-   {{ category }}
-   <br>
-   <br>
-   {{ category_textBlob }}
-   <br>
-   <br>
-   {{ category_sia }}
- </div>
+    <div style="display: flex;width: 100%;">
+
+      <div class="respuesta {% if title %}show{% else %}hide{% endif %}" style="flex-direction: column;">
+        <h2>Analizado con Word2Vec</h2>
+        <div class="feel">
+          <h3>Sentimiento: </h3>
+          <p>{{ category }}</p>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="emoji {% if category == 'Positivo' %}show{% else %}hide{% endif %}">
+          <i class="em em-grinning " aria-role="presentation" aria-label="GRINNING FACE" style="font-size: 4em"></i>
+        </div>
+        <div class="emoji {% if category == 'Neutral' %}show{% else %}hide{% endif %}">
+          <i class="em em-expressionless " aria-role="presentation" aria-label="EXPRESSIONLESS FACE"
+            style="font-size: 4em"></i>
+        </div>
+        <div class="emoji {% if category == 'Negativo' %}show{% else %}hide{% endif %}">
+          <i class="em em-disappointed " aria-role="presentation" aria-label="DISAPPOINTED FACE"
+            style="font-size: 4em"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display: flex;width: 100%;">
+
+      <div class="respuesta {% if title %}show{% else %}hide{% endif %}" style="flex-direction: column;">
+        <h2>Analizado con TextBlob</h2>
+        <div class="feel">
+          <h3>Polaridad: </h3>
+          <p>{{ category_textBlob_polaridad }}</p>
+        </div>
+        <div class="feel">
+          <h3>Sentimiento: </h3>
+          <p>{{category_textBlob_sentimiento}}</p>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="emoji {% if category_textBlob_sentimiento == 'Positivo' %}show{% else %}hide{% endif %}">
+          <i class="em em-grinning " aria-role="presentation" aria-label="GRINNING FACE" style="font-size: 4em"></i>
+        </div>
+        <div class="emoji {% if category_textBlob_sentimiento == 'Neutral' %}show{% else %}hide{% endif %}">
+          <i class="em em-expressionless " aria-role="presentation" aria-label="EXPRESSIONLESS FACE"
+            style="font-size: 4em"></i>
+        </div>
+        <div class="emoji {% if category_textBlob_sentimiento == 'Negativo' %}show{% else %}hide{% endif %}">
+          <i class="em em-disappointed " aria-role="presentation" aria-label="DISAPPOINTED FACE"
+            style="font-size: 4em"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display: flex;width: 100%;">
+
+      <div class="respuesta {% if title %}show{% else %}hide{% endif %}" style="flex-direction: column;">
+        <h2>Analizado con SIA</h2>
+        <div class="feel">
+          <h3>Polaridad: </h3>
+          <P>{{ category_sia_polaridad }}</P>
+        </div>
+
+        <div class="feel">
+          <h3>Sentimiento: </h3>
+          <P>{{ category_sia_sentimiento }}</P>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="emoji {% if category_sia_sentimiento == 'Positivo' %}show{% else %}hide{% endif %}">
+          <i class="em em-grinning " aria-role="presentation" aria-label="GRINNING FACE" style="font-size: 4em"></i>
+        </div>
+        <div class="emoji {% if category_sia_sentimiento == 'Neutral' %}show{% else %}hide{% endif %}">
+          <i class="em em-expressionless " aria-role="presentation" aria-label="EXPRESSIONLESS FACE"
+            style="font-size: 4em"></i>
+        </div>
+        <div class="emoji {% if category_sia_sentimiento == 'Negativo' %}show{% else %}hide{% endif %}">
+          <i class="em em-disappointed " aria-role="presentation" aria-label="DISAPPOINTED FACE"
+            style="font-size: 4em"></i>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 

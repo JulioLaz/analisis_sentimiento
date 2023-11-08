@@ -36,17 +36,20 @@ def predict():
     titulo_tokens = tokenizador(texto_en)
     titulo_vector = combinacion_vectores_por_suma(titulo_tokens, w2v_modelo)
     titulo_categoria = clasificador.predict(titulo_vector)
-
     output = titulo_categoria[0].capitalize()
-    output_textBlob = sentimient_TextBlob(texto_en)
-    output_sia = sentimient_sia(texto_en)
+    
+    output_textBlob_polaridad,output_textBlob_sentimiento = sentimient_TextBlob(texto_en)
+    output_sia_polaridad,output_sia_sentimiento = sentimient_sia(texto_en)
 
     return render_template('index.html',
-                            title='Frase: {}'.format(texto_es), 
-                            category='Categoría: {}'.format(output),
-                            category_textBlob='Categoría: {}'.format(output_textBlob),
-                            # category_sia=float(output_sia))
-                            category_sia='Categoría: {}'.format(output_sia))
+                            title='"{}"'.format(texto_es), 
+                            category=output,
+                            # category='Polaridad: {}'.format(output),
+                            category_textBlob_polaridad=output_textBlob_polaridad,
+                            category_textBlob_sentimiento=output_textBlob_sentimiento,
+                            category_sia_polaridad=output_sia_polaridad,
+                            category_sia_sentimiento = output_sia_sentimiento
+                            )
 
 if __name__ == "__main__":
     app.run(debug=True)

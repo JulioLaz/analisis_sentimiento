@@ -25,21 +25,24 @@ def combinacion_vectores_por_suma(tokens, modelo):
 
 def sentimient_TextBlob(frase):
     tb = TextBlob(frase)
-    polaridad = tb.sentiment.polarity
-    return f'\nLa Polaridad de la frase con TextBlob es: {polaridad:.2f}'
+    polaridad = round(tb.sentiment.polarity,3)
+    if polaridad >= 0.05:
+        sentiment= "Positivo"
+    elif polaridad <= -0.05:
+          sentiment= "Negativo"
+    else:        sentiment="Neutral"
+    return polaridad,sentiment
 
 def sentimient_sia(frase):
    sia = SentimentIntensityAnalyzer()
    sentimiento = sia.polarity_scores(frase)
 
-  #  print("\nPuntuación de polaridad con SIA:", sentimiento['compound'])
-
-   if sentimiento['compound'] >= 0.05:
-      sentiment= "Sentimiento: Positivo"
-   elif sentimiento['compound'] <= -0.05:
-      sentiment= "Sentimiento: Negativo"
+   polaridad=round(sentimiento['compound'],3)
+   if polaridad >= 0.05:
+      sentiment= "Positivo"
+   elif polaridad <= -0.05:
+      sentiment= "Negativo"
    else:
-      sentiment="Sentimiento: Neutral"
+      sentiment="Neutral"
 
-  #  return sentimiento['compound']
-   return f'La Polaridad de la frase con sia es: ',sentimiento['compound'],sentiment 
+   return polaridad,sentiment
