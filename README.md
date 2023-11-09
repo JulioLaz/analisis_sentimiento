@@ -2,6 +2,13 @@
 
 * @author: Lazarte, Julio
 
+!!!   cargar el modelo en la carpeta models/ !!!
+https://drive.google.com/file/d/1yQe6_Ci_D8W9C7nwKB2_NY5o7_-fGX1Z/view?usp=sharing
+
+!!! también puedes generarlo desde el colab en donde se entrena el modelo Word2Vec con Skip Gram !!!
+https://colab.research.google.com/drive/1enkAWGwnhlSeA2eGUUOLd9sDWBw2egiV?usp=sharing
+
+
 ![Imagen del app funcionando](img/img.png)
 
 ## Description
