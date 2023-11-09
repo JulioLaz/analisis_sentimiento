@@ -1,5 +1,4 @@
 # CLASIFICADOR DE SENTIMIENTO
-Cripto Predicción: Decisión y predicción de valor futuro de criptomonedas:
 
 * @author: Lazarte, Julio
 
